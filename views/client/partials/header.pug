@@ -1,1 +1,43 @@
-header Header
+header.header
+  //- .container
+  //-   .row.align-items-center
+  //-     .col-3
+  //-       .inner-logo
+  //-         a(href="/")
+  //-           img(src="/images/logo1.png", alt="Logo")
+  //-     .col-9
+  //-       .inner-menu
+  //-         ul
+  //-           li
+  //-             a(href="/") Trang chủ
+  //-           li
+  //-             a(href="/products") Sản phẩm
+  div(class="grid")
+    nav(class="header__navbar")
+      ul(class="header__navbar-list")
+        li(class="header__navbar-item header__navbar-item--has-qr") Vào cửa hàng trên ứng dụng 
+          //- Headet QR code
+          div(class="header_qr")
+            img(src="images/QRcode.png", alt="QR code" class="header_qr-img")
+            div(class="header__qr-apps")
+              a(href="" class="header__qr-link")
+                img(src="/images/googleplay.png", alt="Google Play" class="header__qr-download-img")
+              a(href="" class="header__qr-link") 
+                img(src="/images/appstore.png", alt="App Store" class="header__qr-download-img")
+        span(class="header__navbar-item--separator") 
+        li(class="header__navbar-item") 
+          span(class="header__navbar-item--no-pointer") Kết nối
+          a(href="" class="header__navbar-icon-link")
+            i.header__navbar-icon.fa-brands.fa-facebook
+          a(href="" class="header__navbar-icon-link")
+            i.header__navbar-icon.fa-brands.fa-instagram  
+      ul(class="header__navbar-list")
+        li(class="header__navbar-item")
+          i.header__navbar-icon.fa-regular.fa-bell
+          a(class="header__navbar-item-link" href="") Thông báo
+        li(class="header__navbar-item")
+          i.header__navbar-icon.fa-regular.fa-circle-question
+          a(class="header__navbar-item-link" href="") Trợ giúp 
+        li(class="header__navbar-item header__navbar-item--strong")  Đăng ký
+        span(class="header__navbar-item--separator") 
+        li(class="header__navbar-item header__navbar-item--strong")  Đăng nhập
