@@ -1,7 +1,14 @@
 :root {
+    --primary-color: #f95330;
     --white-color: #fff;
     --black-color: #000;
-    --text-color: #333
+    --text-color: #333;
+    --border-color: #dbdbdb;
+    --star-gold-color: #ffce3e;
+
+    --header-height: 120px;
+    --navbar-height: 34px;
+    --header-with-search-height: calc(var(--header-height) - var(--navbar-height));
 }
 
 * {
@@ -29,6 +36,12 @@ html {
 .grid__row {
     display: flex;
     flex-wrap: wrap;
+}
+
+.grid__column-2-4 {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 20%;
 }
 
 /* Animation */
