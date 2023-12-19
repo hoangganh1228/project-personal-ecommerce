@@ -2,7 +2,56 @@ extends ../../layouts/default.pug
 include ../../mixins/box-head.pug
 
 block main
-  .container.my-3
-    .row
-      .col-12
-        +box-head("Danh sách sản phẩm")
+  //- .container.my-3
+  //-   .row
+  //-     .col-12
+  //-       +box-head("Danh sách sản phẩm")
+
+    .row 
+      each item in products 
+        .col-4.mb-3
+          .product-item
+            .inner-image
+              img(src=item.thumbnail, alt=item.title)
+            .inner-content
+              h3.inner-title #{item.title}
+                //- .inner-price-new #{item.priceNew}$
+              .inner-price-old #{item.price}$
+              .inner-discount -#{item.discountPercentage}%
+
+  div(class="app__container")
+    div(class="grid")
+      div(class="grid__row")
+        div(class="grid__column-2")
+          nav(class="category")
+            h3(class="category__heading")
+              i.category__heading-icon.fa-solid.fa-list
+              | Danh mục
+            
+            
+            ul(class="category-list")
+              li(class="category-item category-item--active")
+                a(href="#" class="category-item__link") Macbook 
+              li(class="category-item")
+                a(href="#" class="category-item__link") Dell
+              li(class="category-item")
+                a(href="#" class="category-item__link") Lenovo   
+        
+        div(class="grid__column-10")
+          div(class="home-product") 
+            div(class="grid__row")
+              //- .
+              each item in products 
+                div(class="grid__column-2-4 ")
+                  //- Product item
+                  a(href="" class="home-product-item")  
+                    div(class="home-product-item__img" style=`background-image: url(${item.thumbnail})`) 
+                    h4(class="home-product-item__name") #{item.title}
+                    div(class="home-product-item__price") 
+                      span(class="home-product-item__price-old") #{item.price}$
+                      span(class="home-product-item__price-current") 999$
+                    div(class="home-product-item__sale-off")
+                      span(class="home-product-item__sale-off-percent") -#{item.discountPercentage}%
+                      span(class="home-product-item__sale-off-label") GIẢM
+                        
+                    
