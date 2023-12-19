@@ -3,6 +3,7 @@ require("dotenv").config();
 
 const database = require("./config/database")
 
+const routeAdmin = require("./routes/admin/index.route");
 const route = require("./routes/client/index.route");
 
 database.connect();
@@ -20,7 +21,7 @@ app.set("view engine", "pug");
 
 // Routes
 route(app);
-
+routeAdmin(app);
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}`);
