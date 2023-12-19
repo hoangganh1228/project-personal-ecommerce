@@ -49,7 +49,7 @@ block main
                     h4(class="home-product-item__name") #{item.title}
                     div(class="home-product-item__price") 
                       span(class="home-product-item__price-old") #{item.price}$
-                      span(class="home-product-item__price-current") 999$
+                      span(class="home-product-item__price-current") #{item.priceNew}$
                     div(class="home-product-item__sale-off")
                       span(class="home-product-item__sale-off-percent") -#{item.discountPercentage}%
                       span(class="home-product-item__sale-off-label") GIẢM
