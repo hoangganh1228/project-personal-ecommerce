@@ -10,7 +10,7 @@ module.exports.index = async (req, res) => {
     
     const filterStatus = filterStatusHelper(req.query)
 
-    console.log(filterStatus);
+    // console.log(filterStatus);
 
     let find = {
         deleted: false
