@@ -21,4 +21,10 @@ mixin pagination(pagination)
                         class="page-link"
                         button-pagination=pagination.currentPage + 1
                     ) Kế tiếp
-                    
+            if(pagination.currentPage == pagination.totalPage - 2)
+                li(class="page-item")
+                    button(
+                        class="page-link"
+                        button-pagination=pagination.totalPage
+                ) Trang cuối 
+
