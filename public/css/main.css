@@ -359,19 +359,23 @@
 
 .home-product-item__sale-off-percent {
     color: #ee4d2d;
-    font-weight: 1000;
-    font-size: 1.2rem;
+    font-weight: 600;
+    font-size: 1.1rem;
     line-height: 1.2rem;
     position: relative;
     top: 5px;
+    /* width:100%; */
 }
 
 .home-product-item__sale-off-label {
+    display:inline-block;
     color: var(--white-color);
-    font-size: 1.3rem;
-    line-height: 1.3rem;
+    font-size: 1rem;
+    line-height: 1.1rem;
     position: relative;
-    top: 3px;
-    font-weight: 600;
+    top: 4px;
+    
+
+    font-weight: 500;
 }
 
