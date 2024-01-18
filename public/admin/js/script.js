@@ -116,6 +116,16 @@ if(formChangeMulti) {
             "input[name='id']:checked"
         );
         
+        const typeChange = e.target.elements.type.value; 
+
+        if(typeChange == "delete-all") {
+            const isConfirm = confirm("Bạn có chắc muốn xóa những sản phẩm này?");
+
+            if(!isConfirm)  {
+                return;
+            }
+        }
+
         // console.log(inputChecked);
         if(inputChecked.length > 0) {
             let ids = [];
