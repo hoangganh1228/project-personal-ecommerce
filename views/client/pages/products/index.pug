@@ -47,7 +47,8 @@ block main
                   //- Product item
                   a(href="" class="home-product-item")  
                     div(class="home-product-item__img" style=`background-image: url(${item.thumbnail})`) 
-                    h4(class="home-product-item__name") #{item.title}
+                    h4(class="home-product-item__name") 
+                      a(href=`/products/${item.slug}`) #{item.title}
                     div(class="home-product-item__price") 
                       span(class="home-product-item__price-old") #{item.price}$
                       span(class="home-product-item__price-current") #{item.priceNew}$
