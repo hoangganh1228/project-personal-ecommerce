@@ -213,4 +213,27 @@ module.exports.editPatch = async (req, res) => {
     }
 
     res.redirect("back")
-}  
+} 
+
+// [POST] /admin/products/detail/:id
+module.exports.detail = async (req, res) => {
+    try {
+        const find = {
+            deleted: false,
+            _id: req.params.id
+        }
+    
+        const product = await Product.findOne(find)
+        
+    
+        res.render("admin/pages/products/detail", {
+            pageTitle: product.title,
+            product: product
+        }) 
+    } catch (error) {
+        req.flash("error", `Không tồn tại sản phẩm này!`)
+
+        res.redirect(`${systemConfig.prefixAdmin}/products`)
+    }
+    
+} 
