@@ -4,5 +4,6 @@ module.exports.creatPost = (req, res, next) => {
         res.redirect("back")
         return;
     }
+    
     next();
 }
