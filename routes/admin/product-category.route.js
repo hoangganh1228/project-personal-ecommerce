@@ -11,6 +11,8 @@ const uploadCloud = require("../../middlewares/admin/uploadCloud.middleware");
 
 router.get("/", controller.index);
 
+router.patch("/change-status/:status/:id", controller.changeStatus)
+
 router.get("/create", controller.create);
 
 router.post(

@@ -58,3 +58,12 @@ mixin table-tree(items, level = 1)
                 ) Xóa
         if item.children && item.children.length > 0
             +table-tree(item.children, level + 1)
+    form(
+      action=""
+      method="POST"
+      id="form-change-status"
+      data-path=`${prefixAdmin}/products-category/change-status/`
+
+    )
+
+    script(src="/admin/js/product-category.js")
