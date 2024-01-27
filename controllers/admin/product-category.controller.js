@@ -3,35 +3,13 @@ const ProductCategory = require("../../models/product-category.model");
 const systemConfig = require("../../config/system");
 
 const createTreeHelper = require("../../helpers/createTree")
+const filterStatusHelper = require("../../helpers/filterStatus")
+const searchHelper = require("../../helpers/search")
+
 // [GET] /admin/products-category
 module.exports.index = async (req, res) => {
-    let filterStatus = [
-        {
-            name: "Tất cả",
-            status: "",
-            class: ""
-        },
-        {
-            name: "Hoạt động",
-            status: "active",
-            class: ""
+    const filterStatus = filterStatusHelper(req.query)
 
-        },
-        {
-            name: "Dừng hoạt động",
-            status: "inactive",
-            class: ""
-
-        },
-    ]
-    
-    if(req.query.status) {
-        const index = filterStatus.findIndex(item => item.status == req.query.status)
-        filterStatus[index].class = "active";
-    } else {
-        const index = filterStatus.findIndex(item => item.status == "")
-        filterStatus[index].class = "active";
-    }
 
     let find = {
         deleted: false,
@@ -39,6 +17,12 @@ module.exports.index = async (req, res) => {
 
     if(req.query.status) {
         find.status = req.query.status;
+    }
+
+    // Tìm kiếm
+    const objectSearch = searchHelper(req.query);
+    if(objectSearch.regex) {
+        find.title = objectSearch.regex
     }
 
     const records = await ProductCategory.find(find);
