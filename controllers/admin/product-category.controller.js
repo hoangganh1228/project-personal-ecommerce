@@ -5,19 +5,52 @@ const systemConfig = require("../../config/system");
 const createTreeHelper = require("../../helpers/createTree")
 // [GET] /admin/products-category
 module.exports.index = async (req, res) => {
+    let filterStatus = [
+        {
+            name: "Tất cả",
+            status: "",
+            class: ""
+        },
+        {
+            name: "Hoạt động",
+            status: "active",
+            class: ""
+
+        },
+        {
+            name: "Dừng hoạt động",
+            status: "inactive",
+            class: ""
+
+        },
+    ]
+    
+    if(req.query.status) {
+        const index = filterStatus.findIndex(item => item.status == req.query.status)
+        filterStatus[index].class = "active";
+    } else {
+        const index = filterStatus.findIndex(item => item.status == "")
+        filterStatus[index].class = "active";
+    }
+
     let find = {
         deleted: false,
     };
-    
 
+    if(req.query.status) {
+        find.status = req.query.status;
+    }
 
     const records = await ProductCategory.find(find);
 
     const newRecords = createTreeHelper.tree(records);
 
+    
+
     res.render("admin/pages/products-category/index", {
-    pageTitle: "Danh mục sản phẩm",
-    records: newRecords
+        pageTitle: "Danh mục sản phẩm",
+        records: newRecords,
+        filterStatus: filterStatus
     });
 }
 

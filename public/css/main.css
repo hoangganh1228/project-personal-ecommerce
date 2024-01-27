@@ -292,6 +292,7 @@
 }
 
 .home-product-item__img {
+    
     padding-top: 100%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -308,12 +309,17 @@
     height: 3.6rem;
     margin: 10px 10px 6px;
     overflow: hidden;
-    display: block;
+    display: inline;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     /* text-overflow: ellipsis;
     white-space: nowrap; */
+}
+
+.home-product-item__name:hover {
+    cursor: pointer;
+    color: rgb(0, 115, 255);
 }
 
 .home-product-item__price {
