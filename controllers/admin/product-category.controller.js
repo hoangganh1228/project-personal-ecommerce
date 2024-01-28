@@ -64,6 +64,18 @@ module.exports.changeStatus = async (req, res) => {
 
 }
 
+// [DELETE] /admin/products-category/delete/:id
+module.exports.deleteItem = async(req, res) => {
+    const id = req.params.id;
+
+    await ProductCategory.updateOne({ _id: id}, {
+        deleted: true,
+        deletedAt: new Date()
+    });
+    req.flash('success', `Đã xóa thành công danh mục sản phẩm!`);
+    res.redirect("back")
+}
+
 // [GET] /admin/products-category/create
 module.exports.create = async (req, res) => {
     let find = {
@@ -134,3 +146,26 @@ module.exports.editPatch = async (req, res) => {
     res.redirect("back")
  
 }
+
+// [GET] /admin/products-category/detail/:id
+module.exports.detail = async (req, res) => {
+    try {
+      const find = {
+        deleted: false,
+        _id: req.params.id
+      };
+  
+      const productCategory = await ProductCategory.findOne(find);
+  
+    //   console.log(productCategory);
+  
+      res.render("admin/pages/products-category/detail", {
+        pageTitle: productCategory.title,
+        productCategory: productCategory  
+      });
+    } catch (error) {
+  
+      res.redirect(`${systemConfig.prefixAdmin}/products-category`)
+    }
+  
+  }
