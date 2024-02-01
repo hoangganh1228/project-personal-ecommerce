@@ -1,17 +1,29 @@
 extends ../../layouts/default.pug
-
+include ../../mixins/filter-status.pug
 block main
   if(role.permissions.includes("accounts_view"))
     h1(class="mb-4") Danh sách tài khoản
     .card.mb-3
       .card-header Bộ lọc và Tìm kiếm
       .card-body
-        each item in filterStatus
-            button(
-                class=`btn btn-sm ml-1 btn-outline-success ${item.class}`
-                button-status=item.status
-            ) #{item.name}
-      
+        .row
+          .col-6
+            +filter-status(filterStatus)
+          .col-6 
+            form(id="form-search")
+                .input-group 
+                    input(
+                      type="text"
+                      placeholder="Nhập từ khóa"
+                      name="keyword"
+                      class="form-control"
+                      value=keyword
+                    )
+                    .input-group-append 
+                      button(
+                          class="btn btn-success"
+                          type="submit"
+                      ) Tìm
     .card.mb-3
       .card-header Danh sách
       .card-body

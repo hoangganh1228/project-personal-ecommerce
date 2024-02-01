@@ -42,6 +42,15 @@ module.exports.index = async (req, res) => {
         find.status = req.query.status;
     }
 
+    let keyword = "";
+
+    if(req.query.keyword) {
+        keyword = req.query.keyword;
+
+        const regex = new RegExp(keyword, "i")
+        find.fullName = regex;
+    }
+
     const records = await Account.find(find).select("-password -token")
 
 
@@ -59,7 +68,8 @@ module.exports.index = async (req, res) => {
     res.render("admin/pages/accounts/index", {
         pageTitle: "Danh sách tài khoản",
         records: records,
-        filterStatus: filterStatus
+        filterStatus: filterStatus,
+        keyword: keyword
     })
 }
 
