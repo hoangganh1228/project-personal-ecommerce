@@ -11,6 +11,7 @@ const systemConfig = require("../../config/system");
 
 // [GET] /admin/accounts
 module.exports.index = async (req, res) => {
+    
     const filterStatus = filterStatusHelper(req.query)
 
     let find = {
@@ -28,8 +29,27 @@ module.exports.index = async (req, res) => {
         find.fullName = objectSearch.regex
     }
 
-    const records = await Account.find(find).select("-password -token")
+    const countAccounts = await Account.countDocuments(find);
 
+    // Pagination
+    let objectPagination = {
+        currentPage: 1,
+        limitItems: 4
+    }
+
+    if(req.query.page) {
+        objectPagination.currentPage = parseInt(req.query.page)
+    }
+
+    objectPagination.skip = (objectPagination.currentPage - 1) * objectPagination.limitItems;
+
+    const totalPage = Math.ceil(countAccounts/objectPagination.limitItems); 
+
+    objectPagination.totalPage = totalPage;
+    // End Pagination
+
+    const records = await Account.find(find).select("-password -token").limit(objectPagination.limitItems).skip(objectPagination.skip);
+ 
 
     for(const record of records) {
         const role = await Role.findOne({
@@ -46,8 +66,19 @@ module.exports.index = async (req, res) => {
         pageTitle: "Danh sách tài khoản",
         records: records,
         filterStatus: filterStatus,
-        keyword: objectSearch.keyword 
+        keyword: objectSearch.keyword,
+        pagination: objectPagination 
     })
+}
+
+module.exports.deleteItem = async (req, res) => {
+    const id = req.params.id;
+    await Account.updateOne({_id: id}, {
+        deleted: true,
+        deletedAt: new Date()
+    })
+
+    res.redirect("back")
 }
 
 // [GET] /admin/accounts/create
