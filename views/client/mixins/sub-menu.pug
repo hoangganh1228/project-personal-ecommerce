@@ -1,0 +1,16 @@
+mixin sub-menu(items, path)
+  ul(class="category-list")
+    each item in items
+      li(class="category-item ")
+        a(href=`${path}/${item.slug}` class="category-item__link") #{item.title} 
+      if item.children && item.children.length > 0
+        +sub-menu(item.children, path)
+
+
+            //- ul(class="category-list")
+            //-   li(class="category-item category-item--active")
+            //-     a(href="#" class="category-item__link") Macbook 
+            //-   li(class="category-item")
+            //-     a(href="#" class="category-item__link") Dell
+            //-   li(class="category-item")
+            //-     a(href="#" class="category-item__link") Lenovo   

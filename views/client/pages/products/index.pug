@@ -1,6 +1,6 @@
 extends ../../layouts/default.pug
 include ../../mixins/box-head.pug
-
+include ../../mixins/sub-menu.pug
 block main
 
   //- .container.my-3
@@ -28,15 +28,15 @@ block main
             h3(class="category__heading")
               i.category__heading-icon.fa-solid.fa-list
               | Danh mục
-            
-            
-            ul(class="category-list")
-              li(class="category-item category-item--active")
-                a(href="#" class="category-item__link") Macbook 
-              li(class="category-item")
-                a(href="#" class="category-item__link") Dell
-              li(class="category-item")
-                a(href="#" class="category-item__link") Lenovo   
+              - const pathProduct = "/products"
+                +sub-menu(layoutProductsCategory, pathProduct)
+            //- ul(class="category-list")
+            //-   li(class="category-item category-item--active")
+            //-     a(href="#" class="category-item__link") Macbook 
+            //-   li(class="category-item")
+            //-     a(href="#" class="category-item__link") Dell
+            //-   li(class="category-item")
+            //-     a(href="#" class="category-item__link") Lenovo   
         
         div(class="grid__column-10")
           div(class="home-product") 
