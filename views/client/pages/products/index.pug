@@ -1,6 +1,8 @@
 extends ../../layouts/default.pug
 include ../../mixins/box-head.pug
 include ../../mixins/sub-menu.pug
+include ../../mixins/product-layout.pug
+
 block main
 
   //- .container.my-3
@@ -42,18 +44,6 @@ block main
           div(class="home-product") 
             div(class="grid__row")
               //- .
-              each item in products 
-                div(class="grid__column-2-4 ")
-                  //- Product item
-                  a(href=href=`/products/${item.slug}` class="home-product-item")  
-                    div(class="home-product-item__img" style=`background-image: url(${item.thumbnail})`) 
-                    h4(class="home-product-item__name") #{item.title}
-                      
-                    div(class="home-product-item__price") 
-                      span(class="home-product-item__price-old") #{item.price}$
-                      span(class="home-product-item__price-current") #{item.priceNew}$
-                    div(class="home-product-item__sale-off")
-                      span(class="home-product-item__sale-off-percent") -#{item.discountPercentage}%
-                      span(class="home-product-item__sale-off-label") GIẢM
+              +product-grid(products)
                         
                     

@@ -1,7 +1,8 @@
 const Product = require("../../models/product.model")
-const ProductCategory = require("../../models/product-category.model");
 
 const createTreeHelper = require("../../helpers/createTree");   
+const productHelper = require("../../helpers/product")
+
 // [GET] /products
 module.exports.index = async (req, res) => {
     const products = await Product.find({
@@ -12,10 +13,7 @@ module.exports.index = async (req, res) => {
     
     // console.log(products);
     
-    const newProducts = products.map(item => {
-        item.priceNew = (item.price-(item.price*item.discountPercentage)/100).toFixed(0);
-        return item;
-    });
+    const newProducts = productHelper.priceNewProducts(products);
 
 
     res.render("client/pages/products/index", {
