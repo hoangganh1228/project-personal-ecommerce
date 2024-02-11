@@ -278,7 +278,31 @@
     display: inline-block;
 }
 
+.header__cart {
+    width: 150px;
+    text-align: center;
+}
 
+.header__cart-wrap {
+    position: relative;
+    display: inline-block;
+    padding: 0 12px;
+    cursor: pointer;
+}
+
+.header__cart-notice {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    padding: 1px 7px;
+    color: var(--primary-color);
+    line-height: 1.4rem;
+    border-radius: 10px;
+    border: 2px solid #ee4d2d;
+    background-color: var(--white-color);
+    font-size: 1.4rem;
+
+}
 
 
 
@@ -646,7 +670,7 @@
   }
   /* End product-detail */
 
-  /* Show Alert */
+/* Show Alert */
 [show-alert] {
     position: fixed;
     top: 70px;

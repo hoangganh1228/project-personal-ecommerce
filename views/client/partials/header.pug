@@ -88,4 +88,8 @@ header.header
           )
             i.fa-solid.fa-magnifying-glass(class="header__search-btn-icon")
       div(class="header__cart")
-        i.fa-solid.fa-cart-shopping(class="header__cart-icon")
+         
+        div(class="header__cart-wrap")
+          a(href="/cart")
+            i.fa-solid.fa-cart-shopping(class="header__cart-icon")
+            span(class="header__cart-notice") #{miniCart ? miniCart.totalQuantity : 0}
