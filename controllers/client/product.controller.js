@@ -61,7 +61,7 @@ module.exports.detail = async (req, res) => {
  
 }
 
-// [GET] /detail/router.get("/:slugCategory", controller.category);
+// [GET] /detail/:slugCategory
 module.exports.category = async (req, res) => {
     try {
         const category = await ProductCategory.findOne({
