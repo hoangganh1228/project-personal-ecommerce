@@ -42,11 +42,15 @@ header.header
         li(class="header__navbar-item")
           i.header__navbar-icon.fa-solid.fa-bag-shopping
           a(class="header__navbar-item-link" href="/products") Trang sản phẩm
-        li(class="header__navbar-item header__navbar-item--strong") 
-          a(class="header__navbar-item-link" href="/user/register") Đăng ký 
-        span(class="header__navbar-item--separator") 
-        li(class="header__navbar-item header__navbar-item--strong")  
-          a(class="header__navbar-item-link" href="/user/login" ) Đăng nhập
+        if(user)
+          li(class="header__navbar-item header__navbar-item--strong") 
+            a(class="header__navbar-item-link" href="/user/logout") Đăng xuất
+        else
+          li(class="header__navbar-item header__navbar-item--strong") 
+            a(class="header__navbar-item-link" href="/user/register") Đăng ký 
+          span(class="header__navbar-item--separator") 
+          li(class="header__navbar-item header__navbar-item--strong")  
+            a(class="header__navbar-item-link" href="/user/login" ) Đăng nhập
           
     
     //- Header with search
