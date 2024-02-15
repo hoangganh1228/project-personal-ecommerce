@@ -3,6 +3,9 @@ const User = require("../../models/user.model");
 const ForgotPassword = require("../../models/forgot-password.model");
 
 const generateHelper = require("../../helpers/generate");   
+const sendMailHelper = require("../../helpers/sendMail")
+
+
 // [GET] /user/registerPost
 module.exports.register = async (req, res) => {
     res.render("client/pages/user/register", {
@@ -117,9 +120,83 @@ module.exports.forgotPasswordPost = async (req, res) => {
     // console.log(objectForgotPassword);
     const forgotPassword = new ForgotPassword(objectForgotPassword);
     await forgotPassword.save()
-
+    
     // Nếu tồn tại email thì gửi mã OTP qua email
-    res.send("OK")
+    const subject =  "Mã OTP xác minh lấy lại mật khẩu";
+    const html = `
+      Mã OTP để lấy lại mật khẩu là <b style="color: green;">${otp}</b>. Thời hạn sử dụng là 3 phút.
+    `;
+    
+    sendMailHelper.sendMail(email, subject, html);
+    
+    
+    res.redirect(`/user/password/otp?email=${email}`);
 }
 
+// [GET] /user/password/otp
+module.exports.otpPassword = async (req, res) => {
+    const email = req.query.email;
+    res.render("client/pages/user/otp-password", {
+        pageTitle: "Nhập mã OTP",
+        email: email,
+    })
+    
+}
 
+// [POST] /user/password/otp
+module.exports.otpPasswordPost = async (req, res) => {
+    const email = req.body.email;
+    const otp = req.body.otp;
+
+    // console.log(email);
+    // console.log(otp);
+
+    const result = await ForgotPassword.findOne({
+        email: email,
+        otp: otp,
+    })
+
+    // console.log(result);
+
+    if(!result) {
+        req.flash("error", "OTP không hợp lệ!");
+        res.redirect("back");
+        return;
+    }
+
+    const user = await User.findOne({
+        email: email
+    })
+
+    res.cookie("tokenUser", user.tokenUser);
+
+    res.redirect("/user/password/reset")
+    
+}
+
+// [GET] /user/password/reset
+module.exports.resetPassword = async (req, res) => {
+    res.render("client/pages/user/reset-password", {
+        pageTitle: "Đổi mật khẩu",
+      });
+    
+}
+
+// [GET] /user/password/reset
+module.exports.resetPasswordPost = async (req, res) => {
+    const password = req.body.password;
+    const tokenUser = req.cookies.tokenUser;
+
+    console.log(password);
+    console.log(tokenUser);
+
+    await User.updateOne({
+        tokenUser: tokenUser
+    }, {
+        password: md5(password)
+    })
+
+
+    res.redirect("/")
+    
+}
