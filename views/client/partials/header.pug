@@ -43,8 +43,13 @@ header.header
           i.header__navbar-icon.fa-solid.fa-bag-shopping
           a(class="header__navbar-item-link" href="/products") Trang sản phẩm
         if(user)
-          li(class="header__navbar-item header__navbar-item--strong") 
-            a(class="header__navbar-item-link" href="/user/logout") Đăng xuất
+          li(class="header__navbar-item")
+            i.fa-solid.fa-user
+            a(class="header__navbar-item-link header__navbar-margin" href="/user/info")  #{user.fullName}
+          span(class="header__navbar-item--separator")
+          li(class="header__navbar-item") 
+            i.fa-solid.fa-right-from-bracket
+            a(class="header__navbar-item-link header__navbar-margin" href="/user/logout") Đăng xuất
         else
           li(class="header__navbar-item header__navbar-item--strong") 
             a(class="header__navbar-item-link" href="/user/register") Đăng ký 

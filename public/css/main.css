@@ -72,6 +72,10 @@
     color: var(--white-color);
 }
 
+.header__navbar-margin {
+    margin-left: 6px;
+}
+
 /* Header QR code */
 .header_qr {
     width: 186px;
