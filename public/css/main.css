@@ -144,11 +144,18 @@
     height: 40px;
     border-radius: 2px;
     background-color: var(--white-color);
-    display: flex;
-    align-items: center;
-    position: relative;
+   
+    
 }
+.header__search-form{
+   width: 100%;
+   height: 100%;
+   position: relative;
+   display:flex;
+   align-items: center;
+   justify-content: space-between;
 
+}
 .header__cart {
     width: 150px;
     text-align: center;
@@ -161,13 +168,15 @@
 }
 
 .header__search-input {
-    flex: 1;
+    
+    flex:1;
     height: 100%;
     border: none;
     outline: none;
     font-size: 1.4rem;
     color: var(--text-color);
-    margin: 0 16px;
+    margin-left:16px;
+    
 }
 
 
@@ -194,8 +203,9 @@
 .header__search-btn {
     position: absolute;
     right: 0;
+    
     text-align: center;
-    transform: translateY(-20%);
+    
     background-color: var(--primary-color);
     border: none;
     height: 34px;

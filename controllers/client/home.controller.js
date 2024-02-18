@@ -10,7 +10,7 @@ module.exports.index = async (req, res) => {
         featured: "1",
         deleted: false,
         status: "active"
-    }).limit(5)
+    }).limit(1)
 
     const newProductsFeatured = productHelper.priceNewProducts(productsFeatured) 
 
