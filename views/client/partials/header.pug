@@ -102,9 +102,18 @@ header.header
             class="header__search-btn"
           )
             i.fa-solid.fa-magnifying-glass(class="header__search-btn-icon")
+      
+      //- Cart layout
       div(class="header__cart")
          
         div(class="header__cart-wrap")
           a(href="/cart")
             i.fa-solid.fa-cart-shopping(class="header__cart-icon")
-            span(class="header__cart-notice") #{miniCart ? miniCart.totalQuantity : 0}
+          div(class="header__cart-list header__cart-list--no-cart")
+            if(miniCart.totalQuantity == 0)
+              img(src="/images/no_cart.png", alt="" class="header__cart-no-cart-img")
+              span(class="header__cart-list-no-cart-msg") Chưa có sản phẩm
+            else 
+              h4(class="header__cart-heading") Sản phẩm đã thêm  
+              
+          span(class="header__cart-notice") #{miniCart ? miniCart.totalQuantity : 0}
