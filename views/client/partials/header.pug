@@ -105,15 +105,37 @@ header.header
       
       //- Cart layout
       div(class="header__cart")
-         
         div(class="header__cart-wrap")
           a(href="/cart")
             i.fa-solid.fa-cart-shopping(class="header__cart-icon")
+            span(class="header__cart-notice") #{miniCart ? miniCart.totalQuantity : 0}
+          //- No cart: header__cart-list--no-cart
           div(class="header__cart-list header__cart-list--no-cart")
             if(miniCart.totalQuantity == 0)
               img(src="/images/no_cart.png", alt="" class="header__cart-no-cart-img")
               span(class="header__cart-list-no-cart-msg") Chưa có sản phẩm
             else 
-              h4(class="header__cart-heading") Sản phẩm đã thêm  
+              h4(class="header__cart-heading") Sản phẩm đã thêm 
               
-          span(class="header__cart-notice") #{miniCart ? miniCart.totalQuantity : 0}
+              ul(class="header__cart-list-item")
+                each item in miniCart.products 
+                  li(class="header__cart-item")
+                    img(src=item.productInfo.thumbnail, alt="" class="header__cart-img")
+                    h5(class="header__cart-item-name") #{item.productInfo.title}
+                    div(class="header__cart-item-detail")
+                      span(class="header__cart-item-price") #{item.productInfo.priceNew}$
+                      span(class="header__cart-item-multipy") x
+                      span(class="header__cart-item-qnt") #{item.quantity} 
+                      div(class="header__cart-item-body")
+                        span(class="header__cart-item-description") #{item.description}
+                        a(
+                            href=`/cart/delete/${item.product_id}`
+                            class="header__cart-item-remove"
+                          ) Xóa
+                           
+                        
+              a(href="/cart" class="header__cart-item-link")
+                button(class="btn btn--primary header__cart-view-cart") Xem giỏ hàng
+                    
+
+          
