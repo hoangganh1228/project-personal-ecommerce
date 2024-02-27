@@ -71,6 +71,17 @@ module.exports.index = async (req, res) => {
     })
 }
 
+// [PATCH] /admin/accounts/change-status/:status/:id
+module.exports.changeStatus = async (req, res) => {
+    // console.log(req.params);
+    const id = req.params.id;
+    const status = req.params.status;
+
+    await Account.updateOne({_id: id}, {status: status})
+
+    res.redirect("back")
+}
+
 module.exports.deleteItem = async (req, res) => {
     const id = req.params.id;
     await Account.updateOne({_id: id}, {

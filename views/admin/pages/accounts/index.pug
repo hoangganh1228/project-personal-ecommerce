@@ -1,5 +1,6 @@
 extends ../../layouts/default.pug
 include ../../mixins/filter-status.pug
+include ../../mixins/form-change-multi.pug
 block main
   if(role.permissions.includes("accounts_view"))
     h1(class="mb-4") Danh sách tài khoản
@@ -25,10 +26,11 @@ block main
                           type="submit"
                       ) Tìm
     .card.mb-3
-      .card-header Danh sách
+      .card-header Danh sách tài khoản
       .card-body
         .row
           .col-8
+            +form-change-multi(`${prefixAdmin}/accounts/change-multi?_method=PATCH`)
           .col-4.text-right
             if(role.permissions.includes("accounts_create"))
               a(
@@ -38,6 +40,7 @@ block main
 
         table(
           class="table table-hover table-sm"
+          checkbox-multi 
         )
           thead
             tr
@@ -52,6 +55,12 @@ block main
           tbody
             each item, index in records
               tr 
+                td 
+                  input(
+                      type="checkbox"
+                      name="id"
+                      value=item.id  
+                  )
                 td #{index+1}
                 td
                   img(
@@ -68,14 +77,18 @@ block main
                     if (item.status === "active")
                       a(
                         href="javascript:;"
+                        data-status=item.status
+                        data-id=item.id
+                        button-change-status 
                         class="badge badge-success"
-                        data-status="active"
                       ) Hoạt động
                     else
                       a(
                         href="javascript:;"
+                        data-status=item.status 
+                        data-id=item.id
+                        button-change-status 
                         class="badge badge-danger"
-                        data-status="inactive"
                       ) Dừng hoạt động
                 td
                   a(
@@ -117,12 +130,18 @@ block main
                             button-pagination=pagination.currentPage + 1
                         ) Kế tiếp
     
-    
     form(
-        action=""
-        method="POST"
-        id="form-delete-item"
-        data-path=`${prefixAdmin}/accounts/delete`
+      action=""
+      method="POST"
+      id="form-change-status"
+      data-path=`${prefixAdmin}/accounts/change-status`
+    )
+
+    form(
+      action=""
+      method="POST"
+      id="form-delete-item"
+      data-path=`${prefixAdmin}/accounts/delete`
 
     )  
   
