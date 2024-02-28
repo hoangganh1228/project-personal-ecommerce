@@ -82,6 +82,26 @@ module.exports.changeStatus = async (req, res) => {
     res.redirect("back")
 }
 
+// [PATCH] /admin/accounts/change-multi/:status/:id
+module.exports.changeMulti = async (req, res) => {
+    const type = req.body.type;
+    const ids = req.body.ids.split(", ");
+    
+    switch (type) {
+        case "active":
+            await Account.updateMany({ _id: { $in: ids } },
+                {status: "active"});
+            break;
+        case "inactive":
+            await Account.updateMany({ _id: { $in: ids } },
+                {status: "inactive"})
+            break;
+        default:
+            break;
+    }
+    res.redirect("back");
+}
+
 module.exports.deleteItem = async (req, res) => {
     const id = req.params.id;
     await Account.updateOne({_id: id}, {
