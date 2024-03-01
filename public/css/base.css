@@ -111,15 +111,15 @@ html {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    /* box-shadow: 0 1px 3.125rem 0 rgba(0, 0, 0, 0.2); */
 }
 
-.select-input__label {
+.select-input__label{
     font-size: 1.4rem;
-
 }
 
 .select-input__icon {
-    font-size: 1.4em;
+    font-size: 1.4rem;
     color: rgb(131, 131, 131);
     position: relative;
     top: 1px;
@@ -133,12 +133,14 @@ html {
     position: absolute;
     left: 0;
     right: 0;
-    top: 25px;
+    top: 32px;
     border-radius: 2px;
     background-color: var(--white-color);
     padding: 8px 16px;
     list-style: none;
     display: none;
+    z-index: 2;
+    /* box-shadow: 0 1px 3.125rem 0 rgba(0, 0, 0, 0.2); */
 }
 .select-input__link {
     font-size: 1.4rem;

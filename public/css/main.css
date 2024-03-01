@@ -655,22 +655,27 @@ right: 0;
     position: relative;
     display: flex;
     align-items: center;
-    padding: 12px 22px;
+    padding:12px 22px;
     border-radius: 2px;
     background-color: rgba(0, 0, 0, 0.04);
 
 }
 
 .home-filter__page {
-    display: flex;
-    align-items: center;
+   
     margin-left: auto;
+    
+   
 }
 
 .home-filter__page-num {
     font-size: 1.5rem;
     color: var(--text-color);
     margin-right: 22px;
+    display: flex;
+    align-items: center;
+    
+    
 }
 
 .home-filter__page-current {
@@ -709,18 +714,22 @@ right: 0;
     display: flex;
     width: 72px;
     height: 36px;
+    margin-left: 10px;
 }
 
 .home-filter__label {
-    font-size: 1.4rem;
-    color: #555;
+    font-size: 1.5rem;
+    color: var(--text-white);
     margin-right: 16px;
+    /* font-weight: 400; */
 
 }
 
 .home-filter__btn {
     min-width: 90px;
     margin-right: 12px;
+    background: #fff;
+    border-radius: 2px;
     
 }
 
