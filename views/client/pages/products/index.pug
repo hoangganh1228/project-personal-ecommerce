@@ -42,21 +42,42 @@ block main
         
         div(class="grid__column-10")
           div(class="home-filter")
-            span(class="home-filter__label") Sắp xếp theo:
-            button(class="home-filter__btn btn") Phổ biến
-            button(class="home-filter__btn btn btn--primary") Mới nhất
-            button(class="home-filter__btn btn") Bán chạy
+            span(class="home-filter__label") Sắp xếp theo:  
+            button(
+              class="home-filter__btn btn"
+              value="position-desc"
+              sort-button
+            ) Mới nhất
+            button(
+              class="home-filter__btn btn"
+              value="title-asc"
+              sort-button
+            ) Phổ biến
+            button(
+              class="home-filter__btn btn"
+            ) Bán chạy
 
             div(class="select-input")
               span(class="select-input__label") Giá
               i.fa-solid.fa-angle-down(class="select-input__icon")
               
               //- List option
+              //- select(
+              //-   class="select-input__list"
+              //-   name="sort"
+              //-   sort-select
+              //- )
+              //-   option(value="position-desc" class="select-input__link") Giá thấp đến cao
+              //-   option(value="position-asc" class="select-input__link") Giá cao đến thấp
               ul(class="select-input__list")
                 li(class="select-input__item") 
-                  a(href="" class="select-input__link") Giá thấp đến cao
+                  a(
+                    href=`products?sortKey=price&sortValue=desc` class="select-input__link"
+                  ) Giá thấp đến cao
                 li(class="select-input__item") 
-                  a(href="" class="select-input__link") Giá cao đến thấp
+                  a(
+                    href=`products?sortKey=price&sortValue=asc` class="select-input__link"
+                  ) Giá cao đến thấp
             div(class="home-filter__page")
               span(class="home-filter__page-num")
                 span(class="home-filter__page-current") 1

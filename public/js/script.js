@@ -13,3 +13,31 @@ if(showAlert) {
   });
 }
 // End Show Alert
+
+// Sort
+
+const buttonSort = document.querySelectorAll("[sort-button]");
+// console.log(buttonSort);
+if(buttonSort.length > 0) {
+  let url = new URL(window.location.href);
+  buttonSort.forEach(button => {
+    console.log(button);
+    button.addEventListener("click", (e) => {
+      const value = e.target.value;
+      // console.log(value);
+      // e.preventDefault();
+      const [sortKey, sortValue] = value.split("-");
+      // console.log(sortKey)  ;
+      // console.log(sortValue);
+      url.searchParams.set("sortKey", sortKey);
+      url.searchParams.set("sortValue", sortValue);
+      e.target.classList.add('btn--primary');
+      window.location.href = url.href;
+    })
+  })
+
+
+
+}
+
+// End Sort

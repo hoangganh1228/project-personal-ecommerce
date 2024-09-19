@@ -6,12 +6,34 @@ const productsHelper = require("../../helpers/product")
 const productsCategoryHelper = require("../../helpers/products-category");
 // [GET] /products
 module.exports.index = async (req, res) => {
-    const products = await Product.find({
+    // Sort
+
+    let sort = {};
+
+    if(req.query.sortKey && req.query.sortValue) {
+        sort[req.query.sortKey] = req.query.sortValue
+    }
+    else {
+
+        sort.position = "desc"
+    } 
+
+    // End Sort
+
+    let find = {
         status: "active",
         deleted: false
-    })
+    }
+
+    
+
+    const products = await Product.find(find)
+    .sort(sort);
     
     
+    
+
+
     // console.log(products);
     
     const newProducts = productsHelper.priceNewProducts(products);
