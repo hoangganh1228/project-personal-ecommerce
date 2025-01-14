@@ -14,6 +14,12 @@ module.exports.cartId = async (req, res, next) => {
         res.cookie("cartId", cart.id, {
             expires: new Date(Date.now() + expiresCookie)
         })
+
+        res.locals.miniCart = {
+            totalQuantity: 0,
+            products: [],
+            totalPrice: 0,
+        };
     } else {
         // Lấy ra thôi 
         const cart = await Cart.findOne({
