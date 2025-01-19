@@ -53,10 +53,7 @@ block main
               value="title-asc"
               sort-button
             ) Phổ biến
-            button(
-              class="home-filter__btn btn"
-            ) Bán chạy
-
+           
             div(class="select-input")
               span(class="select-input__label") Giá
               i.fa-solid.fa-angle-down(class="select-input__icon")
@@ -78,15 +75,7 @@ block main
                   a(
                     href=`products?sortKey=price&sortValue=asc` class="select-input__link"
                   ) Giá cao đến thấp
-            div(class="home-filter__page")
-              span(class="home-filter__page-num")
-                span(class="home-filter__page-current") 1
-                | /14
-                div(class="home-filter__page-control")
-                  a(href="" class="home-filter__page-btn home-filter__page-btn--disabled")
-                    i.fa-solid.fa-angle-left(class="home-filter__page-icon")
-                  a(href="" class="home-filter__page-btn")
-                    i.fa-solid.fa-angle-right(class="home-filter__page-icon")
+  
           div(class="home-product") 
             div(class="grid__row")
               //- .
