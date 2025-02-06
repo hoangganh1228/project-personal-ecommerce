@@ -1,9 +1,13 @@
 extends ../../layouts/default.pug
 include ../../mixins/filter-status.pug
 include ../../mixins/form-change-multi.pug
+include ../../mixins/alert.pug
+
 block main
   if(role.permissions.includes("accounts_view"))
     h1(class="mb-4") Danh sách tài khoản
+    +alert-success(5000)
+    +alert-error(5000)
     .card.mb-3
       .card-header Bộ lọc và Tìm kiếm
       .card-body

@@ -5,9 +5,13 @@ const searchHelper = require("../../helpers/search")
 
 const Account = require("../../models/account.model")
 const Role = require("../../models/role.model")
- 
+const Key = require("../../models/key.model")
+const bcrypt = require('bcrypt')
+const crypto = require('crypto')
 
 const systemConfig = require("../../config/system");
+const keyModel = require("../../models/key.model");
+const { createTokenPair } = require("../../utils/jwtHelper");
 
 // [GET] /admin/accounts
 module.exports.index = async (req, res) => {
@@ -135,12 +139,39 @@ module.exports.createPost = async (req, res) => {
         req.flash("error", `Email ${req.body.email} đã tồn tại`);
         res.redirect("back");
     } else {
-        req.body.password = md5(req.body.password);
+        req.body.password = await bcrypt.hash(req.body.password, 10);
 
         const record = new Account(req.body);
         await record.save();
 
-        res.redirect(`${systemConfig.prefixAdmin}/accounts`);
+        if(record) {
+           const privateKey = crypto.randomBytes(64).toString('hex') 
+           const publicKey = crypto.randomBytes(64).toString('hex')
+           
+           console.log({privateKey, publicKey});
+           const keyStore = await keyModel.create({
+            userId: record._id,
+            publicKey,
+            privateKey
+           })
+
+           if(!keyStore) {
+            req.flash("error", "Loi khi tao khoa!");
+            return res.redirect(`${systemConfig.prefixAdmin}/accounts`);
+           }
+
+           const tokens = await createTokenPair({
+            userId: record._id,
+            email: req.body.email
+           }, publicKey, privateKey)
+            console.log(`Created Token Success::`, tokens);
+            req.flash("succcess", `Tao thanh cong!`);
+            return res.redirect(`${systemConfig.prefixAdmin}/accounts`);
+           
+        }
+
+        req.flash("error", "Tao that bai");
+        return res.redirect(`${systemConfig.prefixAdmin}/accounts`);
     }
 
 
